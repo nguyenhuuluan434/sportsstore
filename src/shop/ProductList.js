@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+
 export class ProductList extends Component {
+
     render() {
         if (this.props.products == null || this.props.products.length === 0) {
             return <h5 className="p-2">No Products</h5>
         }
-        //displaying details of a list of products, whose details are received through a prop named product
         return this.props.products.map(p =>
             <div className="card m-1 p-1 bg-light" key={p.id}>
                 <h4>
@@ -15,6 +16,11 @@ export class ProductList extends Component {
                 </h4>
                 <div className="card-text bg-white p-1">
                     {p.description}
+                    <button className="btn btn-success btn-sm float-right"
+                        //function addToCart will be injected by Shop component when Shop component use ProductList
+                        onClick={() => this.props.addToCart(p)} >
+                        Add To Cart
+                        </button>
                 </div>
             </div>
         )

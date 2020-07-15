@@ -1,7 +1,23 @@
 import { ActionTypes } from "./Types";
 
+// Reducer will receive a type and payload what was responded from action, change old state to new state,
+// Lưu ý rằng thay vì thay đổi state trước đó thì chúng ta sẽ trả về một object state mới, state là immutable.
+// State trong redux phải là immutable, Bạn sẽ không thể thay đổi state mà phải trả về một object state mới,
+// việc này nhằm mục đích tránh những side effect trong application
+
+//sử dụng data store flat to simple trong quá trình render
+const initState = { cart: [], cartItems: 0, cartPrice: 0 }
+
+// The reducer for cart actions keep track of product was selected.
 export const CartReducer = (storeData, action) => {
-    let newStore = { cart: [], cartItems: 0, cartPrice: 0, ...storeData }
+    //sử dụng spread operator để tạo khởi tạo data, data này được tính dựa trên data cũ
+    // storeData parameter as exist data what is in data store
+    // action parameter là input được nhận vào từ action creator
+    // initState parameter là giá trị default nếu exist data chưa tồn tại
+    let newStore = { ...initState, ...storeData }
+
+    //Tùy vào action type sẽ tính toán CRUD
+    //payload trong action là property trong action creator, bao gồm product và quantity
     switch (action.type) {
         case ActionTypes.CART_ADD:
             const p = action.payload.product;
@@ -9,7 +25,6 @@ export const CartReducer = (storeData, action) => {
             let existing = newStore.cart.find(item => item.product.id === p.id)
             if (existing) {
                 existing.quantity += q;
-
             } else {
                 newStore.cart = [...newStore.cart, action.payload]
             }
