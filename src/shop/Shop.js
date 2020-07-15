@@ -5,7 +5,6 @@ import { CartSummary } from "./CartSummary";
 export class Shop extends Component {
 
     handleAddToCart = (...args) => {
-        debugger;
         this.props.addToCart(...args);
         this.props.history.push("/shop/cart");
     }

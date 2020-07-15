@@ -5,15 +5,14 @@ import {Link} from "react-router-dom";
 export class CartSummary extends Component {
 
     getSummary = () => {
-        if (this.props.cartItems <= 0) {
+        if (this.props.cartItems <= 0 || undefined === this.props.cartItems) {
             return <span>Your cart: (empty) </span>
         }
-        debugger;
         let span = <span>
                 {this.props.cartItems} item(s),
-                {/*${this.props.cartPrice.toFixed(2)}*/}
+            ${this.props.cartPrice.toFixed(2)}
             </span>;
-        return  span
+        return span
     }
 
     getLinkClasses = () => {

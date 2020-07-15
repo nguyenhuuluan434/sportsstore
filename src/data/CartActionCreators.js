@@ -1,4 +1,4 @@
-import { ActionTypes } from "./Types";
+import { ActionTypes} from "./Types";
 
 //this class was created with purpose that used to define action creators for cart
 //note payload property that carries the data required to execute the action
@@ -8,7 +8,7 @@ import { ActionTypes } from "./Types";
 export const addToCart = (product, quantity) => ({
     type: ActionTypes.CART_ADD,
     payload: {
-        product,
+        product, 
         quantity: quantity || 1
     }
 });
